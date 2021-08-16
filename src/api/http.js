@@ -22,6 +22,7 @@ class Http {
       return Promise.reject(error.response);
     });
   }
+  //update, delete는 백엔드 프래임워크에 따라 다르게
 
   static update(url, data = {}, config = null) {
     data['_method'] = 'put';

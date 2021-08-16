@@ -1,4 +1,5 @@
 <template>
+<!--맨위 슬라이드 옆으로 넘기는 -->
     <section class="slide1">
         <div class="wrap-slick1">
             <div class="slick1" ref="slick">
@@ -27,6 +28,7 @@
     </section>
 </template>
 <script>
+//vuex에서 가져오는 코드 추가
     import { mapState } from 'vuex';
 
     export default {

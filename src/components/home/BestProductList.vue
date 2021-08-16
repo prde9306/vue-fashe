@@ -1,4 +1,5 @@
 <template>
+<!--  배너바로 밑에 bestproduct 3개 칼럼(2개,2개,1개)-->
   <section class="banner bgwhite p-t-40 p-b-40">
     <div class="container">
       <div class="row">
@@ -84,6 +85,7 @@
       firstColumn() {
         if (this.products.length >= 2) {
           return this.products.slice(0, 2);
+          //0,1번 가져오기
         }
 
         return [];
@@ -91,6 +93,7 @@
       secondColumn() {
         if (this.products.length >= 4) {
           return this.products.slice(2, 4);
+          //2,3번 가져오기
         }
 
         return [];
@@ -103,6 +106,7 @@
         return [];
       }
     },
+    //데이터를 이렇게 가져오는 것 (Vuex를 통해서)
     created() {
       this.$store.dispatch('product/setBestProducts');
     }

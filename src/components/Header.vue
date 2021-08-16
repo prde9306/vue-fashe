@@ -47,8 +47,8 @@
                                 <a>Shop</a>
                             </router-link>
 
-                            <router-link :to="{name: 'features'}" tag="li" active-class="sale-not" exact>
-                                <a>Features</a>
+                            <router-link :to="{name: 'cart'}" tag="li" active-class="sale-not" exact>
+                                <a>Cart</a>
                             </router-link>
                         </ul>
                     </nav>
@@ -95,9 +95,13 @@
                             <div class="header-cart-buttons">
                                 <div class="header-cart-wrapbtn">
                                     <!-- Button -->
+
+                                  <router-link :to="{name: 'cart'}" tag="li" active-class="sale-noti" exact>
                                     <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                         View Cart
                                     </a>
+                                  </router-link>
+
                                 </div>
 
                                 <div class="header-cart-wrapbtn">
