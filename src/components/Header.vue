@@ -15,18 +15,18 @@
 					Free shipping for standard order over $100
 				</span>
 
-                <div class="topbar-child2">
-					<span class="topbar-email">
-						fashe@example.com
-					</span>
+<!--                <div class="topbar-child2">-->
+<!--					<span class="topbar-email">-->
+<!--						fashe@example.com-->
+<!--					</span>-->
 
-                    <div class="topbar-language rs1-select2">
-                        <select class="selection-1" name="time">
-                            <option>USD</option>
-                            <option>EUR</option>
-                        </select>
-                    </div>
-                </div>
+<!--                    <div class="topbar-language rs1-select2">-->
+<!--                        <select class="selection-1" name="time">-->
+<!--                            <option>USD</option>-->
+<!--                            <option>EUR</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
 
             <div class="wrap_header">
@@ -50,12 +50,18 @@
                             <router-link :to="{name: 'cart'}" tag="li" active-class="sale-not" exact>
                                 <a>Cart</a>
                             </router-link>
+
+                            <router-link :to="{name: 'signIn'}" tag="li" active-class="sale-not" exact>
+                            <a>LogIn</a>
+                            </router-link>
+
                         </ul>
                     </nav>
                 </div>
 
                 <!-- Header Icon -->
                 <div class="header-icons">
+<!--                  여기에 로그인, 회원가입, 개인정보 수정 넣어줘야 함-->
                     <a href="#" class="header-wrapicon1 dis-block">
                         <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                     </a>
@@ -201,20 +207,20 @@
 						</span>
                     </li>
 
-                    <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-                        <div class="topbar-child2-mobile">
-							<span class="topbar-email">
-								fashe@example.com
-							</span>
+<!--                    <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">-->
+<!--                        <div class="topbar-child2-mobile">-->
+<!--							<span class="topbar-email">-->
+<!--								fashe@example.com-->
+<!--							</span>-->
 
-                            <div class="topbar-language rs1-select2">
-                                <select class="selection-1" name="time">
-                                    <option>USD</option>
-                                    <option>EUR</option>
-                                </select>
-                            </div>
-                        </div>
-                    </li>
+<!--                            <div class="topbar-language rs1-select2">-->
+<!--                                <select class="selection-1" name="time">-->
+<!--                                    <option>USD</option>-->
+<!--                                    <option>EUR</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
 
                     <li class="item-topbar-mobile p-l-10">
                         <div class="topbar-social-mobile">
