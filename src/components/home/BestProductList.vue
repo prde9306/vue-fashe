@@ -1,5 +1,5 @@
 <template>
-<!--  배너바로 밑에 bestproduct 3개 칼럼(2개,2개,1개)-->
+<!--  배너바로 밑에 bestproduct 3개 칼럼(2개,2개,1개) 여기 할인중인 상품 진열-->
   <section class="banner bgwhite p-t-40 p-b-40">
     <div class="container">
       <div class="row">
@@ -63,9 +63,9 @@
 
               <div class="w-size2 p-t-25">
                 <!-- Button -->
-                <a href="#" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
+                <router-link :to="{name : 'signUp'}" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
                   Sign Up
-                </a>
+                </router-link>
               </div>
             </div>
           </div>
@@ -87,7 +87,6 @@
           return this.products.slice(0, 2);
           //0,1번 가져오기
         }
-
         return [];
       },
       secondColumn() {

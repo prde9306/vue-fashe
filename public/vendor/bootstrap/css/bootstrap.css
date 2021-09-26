@@ -2569,7 +2569,7 @@ tbody.collapse.show {
 }
 
 .dropdown-menu {
-  position: absolute;
+  position: relative;
   top: 100%;
   left: 0;
   z-index: 1000;
@@ -8182,4 +8182,4 @@ a.text-dark:focus, a.text-dark:hover {
 .invisible {
   visibility: hidden !important;
 }
-/*# sourceMappingURL=bootstrap.css1.map */
+

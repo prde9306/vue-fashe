@@ -1,9 +1,10 @@
 <template>
+  <!--여기는 일반 상품 진열 랜덤으로?-->
   <section class="newproduct bgwhite p-t-45 p-b-105">
     <div class="container">
       <div class="sec-title p-b-60">
         <h3 class="m-text5 t-center">
-          Featured Products
+          List of products on discount
         </h3>
       </div>
 
@@ -25,6 +26,7 @@
   import Product from '@/components/Product.vue';
 
   export default {
+    props:["baseURL"],
     computed: {
       ...mapState('product', {
         products: state => state.featuredProducts

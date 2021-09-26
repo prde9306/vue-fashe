@@ -1,47 +1,37 @@
 <template>
-    <header class="header1">
-        <!-- Header desktop -->
-        <div class="container-menu-header">
-            <div class="topbar">
-                <div class="topbar-social">
-                    <a href="https://facebook.com" target="_blank" class="topbar-social-item fa fa-facebook"></a>
-                    <a href="#" class="topbar-social-item fa fa-instagram"></a>
-                    <a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
-                    <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
-                    <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
-                </div>
+  <header class="header1">
+    <!--sementic-ui-->
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+     <!--sementic-ui-->
 
-                <span class="topbar-child1">
-					Free shipping for standard order over $100
+    <!-- Header desktop -->
+    <div class="container-menu-header">
+      <div class="topbar">
+        <div class="topbar-social">
+          <a href="https://facebook.com" target="_blank" class="topbar-social-item fa fa-facebook"></a>
+          <a href="#" class="topbar-social-item fa fa-instagram"></a>
+          <a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
+          <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
+          <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
+        </div>
+
+        <span class="topbar-child1">
+					5만원 이상 구매시 무료배송해 드립니다!!^-^
 				</span>
 
-<!--                <div class="topbar-child2">-->
-<!--					<span class="topbar-email">-->
-<!--						fashe@example.com-->
-<!--					</span>-->
 
-<!--                    <div class="topbar-language rs1-select2">-->
-<!--                        <select class="selection-1" name="time">-->
-<!--                            <option>USD</option>-->
-<!--                            <option>EUR</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </div>-->
-            </div>
+      </div>
 
             <div class="wrap_header">
                 <!-- Logo -->
                 <a href="index.html" class="logo">
-                    <img src="images/icons/logo.png" alt="IMG-LOGO">
+                    <img src="images/icons/springboot.png" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu -->
                 <div class="wrap_menu">
                     <nav class="menu">
                         <ul class="main_menu">
-                            <router-link :to="{name: 'home'}" tag="li" active-class="sale-noti" exact>
-                                <a>Home</a>
-                            </router-link>
 
                             <router-link :to="{name: 'shop'}" tag="li" active-class="sale-noti" exact>
                                 <a>Shop</a>
@@ -50,25 +40,29 @@
                             <router-link :to="{name: 'cart'}" tag="li" active-class="sale-not" exact>
                                 <a>Cart</a>
                             </router-link>
-
-                            <router-link :to="{name: 'signIn'}" tag="li" active-class="sale-not" exact>
-                            <a>LogIn</a>
-                            </router-link>
-
                         </ul>
                     </nav>
                 </div>
 
                 <!-- Header Icon -->
-                <div class="header-icons">
-<!--                  여기에 로그인, 회원가입, 개인정보 수정 넣어줘야 함-->
-                    <a href="#" class="header-wrapicon1 dis-block">
+                <ul class="header-icons">
+
+                    <li class="nav-item dropdown">
+                      <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                         data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                         <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                    </a>
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                    <span class="linedivide1"></span>
+                        <router-link class="dropdown-item" v-if="token" :to="{name : 'profile'}">마이페이지</router-link>
+                        <router-link class="dropdown-item" v-if="!token" :to="{name : 'signIn'}">로그인</router-link>
+                        <router-link class="dropdown-item" v-if="!token" :to="{name : 'signUp'}">회원가입</router-link>
+                        <div class="dropdown-item" v-if="token" @click="signout">로그아웃</div>
+                      </div>
+                    </li>
 
-                    <div class="header-wrapicon2">
+
+                  <li class="nav-item dropdown">
                         <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
                         <span class="header-icons-noti">{{ totalCartQty }}</span>
 
@@ -77,17 +71,17 @@
                             <ul class="header-cart-wrapitem">
                                 <template v-for="product in cartItems">
                                     <li class="header-cart-item">
-                                        <div class="header-cart-item-img">
-                                            <img :src="product.image" alt="IMG">
+                                        <div class="header-cart-item-img" @click="delItem(product)">
+                                            <img :src="product.imagePath" alt="IMG">
                                         </div>
 
                                         <div class="header-cart-item-txt">
                                             <router-link to="/" class="header-cart-item-name">
-                                                {{ product.title }}
+                                                {{ product.productName }}
                                             </router-link>
 
                                             <span class="header-cart-item-info">
-                                              {{ product.qty }} x ${{ product.price }}
+                                              {{ product.cartQuantity }} x ${{ product.productPrice }}
                                             </span>
                                         </div>
                                     </li>
@@ -103,7 +97,7 @@
                                     <!-- Button -->
 
                                   <router-link :to="{name: 'cart'}" tag="li" active-class="sale-noti" exact>
-                                    <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                    <a href="/cart" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                         View Cart
                                     </a>
                                   </router-link>
@@ -118,27 +112,39 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
+
         </div>
 
         <!-- Header Mobile -->
         <div class="wrap_header_mobile">
             <!-- Logo moblie -->
             <a href="index.html" class="logo-mobile">
-                <img src="images/icons/logo.png" alt="IMG-LOGO">
+                <img src="images/icons/springBoot.png" alt="IMG-LOGO">
             </a>
 
             <!-- Button show menu -->
             <div class="btn-show-menu">
                 <!-- Header Icon mobile -->
                 <div class="header-icons-mobile">
-                    <a href="#" class="header-wrapicon1 dis-block">
-                        <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                    </a>
 
-                    <span class="linedivide2"></span>
+                  <div class="nav-item dropdown">
+                    <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown2" role="button"
+                       data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                      <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+
+                      <router-link class="dropdown-item" v-if="token" :to="{name : 'profile'}">마이페이지</router-link>
+                      <router-link class="dropdown-item" v-if="!token" :to="{name : 'signIn'}">로그인</router-link>
+                      <router-link class="dropdown-item" v-if="!token" :to="{name : 'signUp'}">회원가입</router-link>
+                      <div class="dropdown-item" v-if="token" @click="signout">로그아웃</div>
+
+                    </div>
+                  </div>
+<!--                    <span class="linedivide2"></span>-->
 
                     <div class="header-wrapicon2">
                         <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
@@ -150,16 +156,16 @@
                                 <template v-for="product in cartItems">
                                     <li class="header-cart-item">
                                         <div class="header-cart-item-img">
-                                            <img :src="product.image" alt="IMG">
+                                            <img :src="product.imagePath" alt="IMG">
                                         </div>
 
                                         <div class="header-cart-item-txt">
                                             <router-link to="/" class="header-cart-item-name">
-                                                {{ product.title }}
+                                                {{ product.productName }}
                                             </router-link>
 
                                             <span class="header-cart-item-info">
-                                              {{ product.qty }} x ${{ product.price }}
+                                              {{ product.cartQuantity }} x ${{ product.productPrice }}
                                             </span>
                                         </div>
                                     </li>
@@ -173,7 +179,7 @@
                             <div class="header-cart-buttons">
                                 <div class="header-cart-wrapbtn">
                                     <!-- Button -->
-                                    <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                    <a href="/cart" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                         View Cart
                                     </a>
                                 </div>
@@ -270,13 +276,41 @@
         </div>
     </header>
 </template>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+<script src="semantic/dist/semantic.min.js"></script>
+
 <script>
     import { mapState, mapGetters } from 'vuex';
 
     export default {
+      name : "Header",
+      data(){
+        return{
+          token: null
+        }
+      },
+      methods:{
+        signout(){
+          localStorage.removeItem('token');
+          this.token =null;
+          this.$router.go(this.$router.currentRoute);
+        },
+        delItem(product) {
+          this.$store.dispatch('cart/delItem', product);
+          alert
+          this.$router.go(this.$router.currentRoute);
+
+        },
+      },
+      mounted(){
+        this.token = localStorage.getItem('token');
+      },
         computed: {
             ...mapState('cart', {
-                cartItems: state => state.items
+                cartItems: state => state.myCart
             }),
             ...mapGetters('cart', {
                 totalCartPrice: 'totalPrice',
@@ -285,3 +319,4 @@
         }
     }
 </script>
+

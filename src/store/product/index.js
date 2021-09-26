@@ -3,22 +3,22 @@ import productApi from '@/api/product';
 export default {
   namespaced: true,
   state: {
-    products: [],
+    productList: [],
     totalProducts: 0,
     bestProducts: [],
     featuredProducts: [],
-    page: 0,
-    priceRange: null
+    page: 1,
+    saleCode: "Yes"
   },
   mutations: {
-    setBestProducts(state, products) {
-      state.bestProducts = [].concat(products);
+    setBestProducts(state, productList) {
+      state.bestProducts = [].concat(productList);
     },
-    setFeaturedProducts(state, products) {
-      state.featuredProducts = [].concat(products);
+    setFeaturedProducts(state, content) {
+      state.featuredProducts = [].concat(content);
     },
-    setProducts(state, products) {
-      state.products = [].concat(products);
+    setProducts(state, content) {
+      state.productList = [].concat(content);
     },
     setTotalProducts(state, totalCount) {
       state.totalProducts = totalCount;
@@ -36,17 +36,16 @@ export default {
 
       commit('setBestProducts', response.data);
     },
-    async setFeaturedProducts({ commit }) {
-      const response = await productApi.getFeaturedProducts();
+    async setFeaturedProducts({ commit, state }, page =1) {
+      const response = await productApi.getFeaturedProducts(page, state.saleCode);
 
-      commit('setFeaturedProducts', response.data);
+      commit('setFeaturedProducts', response.data.saleProductList.content);
     },
-    async setProducts({ commit, state }, page = 0) {
-      const response = await productApi.getProducts(page, state.priceRange);
-
-      commit('setProducts', response.data.products);
-      commit('setTotalProducts', response.data.total);
-      commit('setPage', page);
+    async setProducts({ commit, state }, page = 1) {
+      const response = await productApi.getProducts(page);
+      commit('setProducts', response.data.productList.content);
+      commit('setTotalProducts', response.data.productList.totalElements);
+      commit('setPage', response.data.productPagingDto);
     },
     async setPriceRange({ commit, dispatch }, priceRange) {
       commit('setPriceRange', priceRange);

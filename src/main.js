@@ -1,11 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import {router} from "@/router";
 import store from './store/index'
-
 import moment from 'moment';
 
-Vue.config.productionTip = false
+
+
+// import VueCookie from 'vue-cookies'
+
+//using axios as a global object
+window.axios = require('axios')
+// Vue.use(VueCookie);
+
+Vue.config.productionTip = false;
 
 Vue.filter('dateFormat', (value) => {
   return moment(value, 'YYYYMMDD').format('YYYY년 MM월 DD일');

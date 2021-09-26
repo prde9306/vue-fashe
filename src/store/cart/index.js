@@ -1,21 +1,29 @@
+import cartApi from "@/api/cart";
+
 export default {
   namespaced: true,
   state: {
-    items: []
+    items: [],
+    myCart : [],
+    cartQuantity:null
   },
   getters: {
     totalPrice(state) {
-      return state.items.reduce((sum, item) => sum + item.price * item.qty, 0);
+      return state.myCart.reduce((sum, myCart) => sum + myCart.productPrice * myCart.cartQuantity, 0);
     },
     totalQty(state) {
-      return state.items.reduce((sum, item) => sum + item.qty, 0);
+      return state.myCart.reduce((sum, myCart) => sum + myCart.cartQuantity, 0);
     }
   },
   mutations: {
+    setMyCart(state, myCartInfo){
+      state.myCart = myCartInfo;
+    },
     addItem(state, item) {
-      const cartItems = state.items.filter(cartItem => cartItem.id === item.id);
+      const cartItems = state.items.filter(cartItem => cartItem.productId === item.productId);
 
       if (cartItems.length === 0) {
+        //push : 리스트에 요소 추가
         state.items.push({
           ...item,
           qty: 1
@@ -24,19 +32,18 @@ export default {
         cartItems[0].qty ++;
       }
     },
-    delItem(state, id) {
-      state.items = state.items.filter(item => item.id !== id);
+    delItem(state, item) {
+      state.items = state.items.filter(cartItem => cartItem.productId !== item.productId);
     },
-    changeQty(state, {id, qty}) {
-      const cartItem = state.items.filter(cartItem => cartItem.id === id);
+    changeQty(state, {item, cartQuantity}) {
+      const cartItem = state.myCart.filter(cartItem => cartItem.productId === item.productId);
 
       if (cartItem.length !== 0) {
-        if (cartItem[0].qty + qty <= 0) {
-          const index = state.items.findIndex(cartItem => cartItem.id === id);
-
-          state.items.splice(index, 1);
+        if (cartItem[0].cartQuantity + cartQuantity <= 0) {
+          const index = state.myCart.findIndex(cartItem => cartItem.productId === item.productId);
+          state.myCart.splice(index, 1);
         } else {
-          cartItem[0].qty += qty;
+          cartItem[0].cartQuantity += cartQuantity;
         }
       }
     },
@@ -48,19 +55,28 @@ export default {
     addItem({ commit }, item) {
       commit('addItem', item);
     },
-    delItem({ commit }, id) {
-      commit('delItem', id);
+    async getMyCart({commit}) {
+      const response = await cartApi.getMyCart();
+      commit('setMyCart', response.data);
     },
-    increaseQty({ commit }, id) {
+    async delItem({ commit }, item) {
+      await cartApi.deleteItem(item)
+      commit('delItem', item);
+    },
+    async increaseQty({commit}, item) {
+      await cartApi.increaseCart(item)
+
       commit('changeQty', {
-        id,
-        qty: 1
+        item,
+        cartQuantity: 1,
       })
     },
-    decreaseQty({ commit }, id) {
+    async decreaseQty({ commit }, item) {
+      await cartApi.decreaseCart(item)
+
       commit('changeQty', {
-        id,
-        qty: -1
+        item,
+        cartQuantity: -1
       })
     },
     clearCart({ commit }) {

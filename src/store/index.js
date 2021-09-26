@@ -6,6 +6,7 @@ import product from './product/index';
 import cart from './cart/index';
 import blog from './blog/index';
 import insta from './insta/index';
+import account from "./user/index";
 //vuex 통합해서 관리하는 곳
 
 Vue.use(Vuex)
@@ -16,7 +17,8 @@ export default new Vuex.Store({
     product,
     cart,
     blog,
-    insta
+    insta,
+    account
   },
   state: {
 

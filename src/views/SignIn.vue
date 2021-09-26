@@ -1,37 +1,8 @@
 <template>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="css2/util.css">
-    <link rel="stylesheet" type="text/css" href="css2/main.css">
-    <!--===============================================================================================-->
-  </head>
-  <body>
-
   <div class="limiter">
-    <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+    <div class="container-login100" style="background-image: url('images/bg_1.jpg');">
       <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-        <form class="login100-form validate-form flex-sb flex-w">
+        <form @submit="signin" class="login100-form validate-form flex-sb flex-w">
 					<span class="login100-form-title p-b-53">
 						Sign In With
 					</span>
@@ -42,7 +13,7 @@
           </a>
 
           <a href="#" class="btn-google m-b-20">
-            <img src="images/icons/icon-google.png" alt="GOOGLE">
+            <img src="/images/icons/icon-google.png" alt="GOOGLE">
             Google
           </a>
 
@@ -51,8 +22,8 @@
 							Email
 						</span>
           </div>
-          <div class="wrap-input100 validate-input" data-validate = "Email is required">
-            <input class="input100" type="email" v-model="email" required >
+          <div class="wrap-input100 validate-input" data-validate="Email is required">
+            <input class="input100" type="email" v-model="email" required>
             <span class="focus-input100"></span>
           </div>
 
@@ -65,13 +36,13 @@
               Forgot?
             </a>
           </div>
-          <div class="wrap-input100 validate-input" data-validate = "Password is required">
-            <input class="input100" type="password" v-model="password" required >
+          <div class="wrap-input100 validate-input" data-validate="Password is required">
+            <input class="input100" type="password" v-model="password" required>
             <span class="focus-input100"></span>
           </div>
 
           <div class="container-login100-form-btn m-t-17">
-            <button class="login100-form-btn">
+            <button type="submit" class="login100-form-btn">
               Sign In
             </button>
           </div>
@@ -81,55 +52,61 @@
 							Not a member?
 						</span>
 
-            <a href="#" class="txt2 bo1">
+            <router-link :to="{name:'signUp'}" class="txt2 bo1">
               Sign up now
-            </a>
+            </router-link>
           </div>
         </form>
       </div>
     </div>
   </div>
 
-  <div id="dropDownSelect1"></div>
-
-  </body>
-  </html>
 </template>
-
-<!--===============================================================================================-->
-<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/bootstrap/js/popper.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/daterangepicker/moment.min.js"></script>
-<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-<script src="js/main.js"></script>
 
 <script>
 export default {
-  name: "SignIn",
-  props : ["baseURL"],
-  data(){
+  name: 'signIn',
+  props: ["baseURL"],
+
+  data() {
     return {
       email: null,
       password: null
     }
   },
-  methods :{
-    async signin(e){
+  methods: {
+    async signin(e) {
+      e.preventDefault();
 
+      const user = {
+        email: this.email,
+        password: this.password
+      }
+
+      await axios({
+        method: 'post',
+        url: this.baseURL + "authenticate",
+        data: JSON.stringify(user),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(res => {
+          localStorage.setItem('token', res.data.token);
+          this.$router.replace('/');
+        })
+         .catch(err => {
+           alert(err.response.data.message);
+            console.log(err);
+         })
+         .finally(() => {
+
+         })
     }
-  }
+  },
 }
 </script>
+
 
 <style scoped>
 

@@ -53,10 +53,9 @@
                             <template v-for="p in Math.ceil(totalProducts / 12)">
                                 <button
                                     type="button"
-                                    @click="changePage(p - 1)"
+                                    @click="changePage(p)"
                                     class="item-pagination flex-c-m trans-0-4"
-                                    :class="{'active-pagination': p - 1 === page}"
-                                >
+                                    :class="{'active-pagination': p === page}">
                                     {{ p }}
                                 </button>
                             </template>
@@ -73,7 +72,6 @@
     import PriceFilter from '@/components/shop/PriceFilter.vue';
     import CategoryFilter from '@/components/shop/CategoryFilter.vue';
     import ColorFilter from '@/components/shop/ColorFilter.vue';
-
     import ProductList from '@/components/shop/ProductList.vue';
 
     export default {

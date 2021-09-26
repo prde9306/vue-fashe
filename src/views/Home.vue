@@ -26,6 +26,7 @@ export default {
     MiddleBanner,
     BlogArticles,
     InstagramArticles
-  }
+  },
+  props : ["baseURL"]
 }
 </script>

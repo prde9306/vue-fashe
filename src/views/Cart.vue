@@ -13,16 +13,16 @@
 
         <div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
           <div class="flex-w flex-m w-full-sm">
-
           </div>
 
           <div class="size10 trans-0-4 m-t-10 m-b-10">
             <!-- Button -->
             <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" @click="clearCart">
-              Clear Cart
+              상품 전체 주문 및 결제
             </button>
           </div>
         </div>
+
 
         <!-- Total -->
         <div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
@@ -105,7 +105,7 @@
   </div>
 </template>
 <script>
-  import CartList from '@/components/features/CartList.vue';
+  import CartList from '@/components/carts/CartList.vue';
 
   export default {
     methods: {

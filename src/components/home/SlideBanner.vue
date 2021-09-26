@@ -1,5 +1,5 @@
 <template>
-<!--맨위 슬라이드 옆으로 넘기는 -->
+<!--맨위 슬라이드 옆으로 넘기는, 여기는 카테고리 진열 -->
     <section class="slide1">
         <div class="wrap-slick1">
             <div class="slick1" ref="slick">

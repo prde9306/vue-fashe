@@ -3,7 +3,7 @@
     <!-- Block2 -->
     <div class="block2">
       <div class="block2-img wrap-pic-w of-hidden pos-relative" :class="{'block2-labelnew': product.badge === 'new', 'block2-labelsale': product.badge === 'sale'}">
-        <img :src="product.image" alt="IMG-PRODUCT">
+        <img :src="product.titleImg" alt="IMG-PRODUCT">
 
         <div class="block2-overlay trans-0-4">
           <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -13,7 +13,7 @@
 
           <div class="block2-btn-addcart w-size1 trans-0-4">
             <!-- Button -->
-            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" @click="addToCart(product)">
+            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" @click="addToCart">
               Add to Cart
             </button>
           </div>
@@ -22,23 +22,53 @@
 
       <div class="block2-txt p-t-20">
         <router-link to="/"  class="block2-name dis-block s-text3 p-b-5">
-          {{ product.title }}
+          {{ product.productName }}
         </router-link>
 
         <span class="block2-price m-text6 p-r-5">
-									${{ product.price }}
+									${{ product.unitPrice }}
 								</span>
       </div>
     </div>
   </div>
 </template>
 <script>
-  export default {
-    props: ['product'],
-    methods: {
-      addToCart(product) {
-        this.$store.dispatch('cart/addItem', product);
+export default {
+  props : ["product"],
+
+  data() {
+    return {
+      productId: null,
+      cartQuantity: null
+    }
+  },
+
+  methods: {
+    async addToCart(e) {
+       e.preventDefault();
+      this.jwt = localStorage.getItem('token');
+
+      const cartQty = {
+          productId: this.product.productId,
+          cartQuantity: 1
       }
+      await axios({
+        method : 'post',
+        url : "http://localhost:3030/api/cart/addProduct",
+        data: JSON.stringify(cartQty),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + this.jwt
+        }
+      }).then(res => {
+          alert(res.data);
+      }).catch(err => {
+          alert(err.response.data.message)
+      });
+
+      //액션 호출(디비로 변경)
+      //this.$store.dispatch('cart/addItem', product);
     }
   }
+}
 </script>
