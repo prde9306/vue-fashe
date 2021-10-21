@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <Header :key="key"/>
+    <Header/>
     <router-view
     :baseURL="baseURL"
-    @refreshHead ="refreshHead"
     />
     <Footer v-if="!['signUp', 'signIn'].includes($route.name)" />
   </div>
@@ -16,17 +15,11 @@
     data(){
       return{
         baseURL : "http://localhost:3030/api/",
-        key :0
       }
     },
     components: {
       Header,
       Footer
-    },
-    methods:{
-      refreshHead(){
-        this.key += 1;
-      }
     },
     mounted() {
       $.initialize();

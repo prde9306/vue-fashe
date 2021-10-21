@@ -170,7 +170,6 @@ export default {
     }
 
   },
-
   computed: {
     ...mapState('account', {
       user: state => state.account

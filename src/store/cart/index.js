@@ -52,14 +52,11 @@ export default {
     }
   },
   actions: {
-    addItem({ commit }, item) {
-      commit('addItem', item);
-    },
     async getMyCart({commit}) {
       const response = await cartApi.getMyCart();
       commit('setMyCart', response.data);
     },
-    async delItem({ commit }, item) {
+    async delItem({commit}, item) {
       await cartApi.deleteItem(item)
       commit('delItem', item);
     },
@@ -71,16 +68,13 @@ export default {
         cartQuantity: 1,
       })
     },
-    async decreaseQty({ commit }, item) {
+    async decreaseQty({commit}, item) {
       await cartApi.decreaseCart(item)
 
       commit('changeQty', {
         item,
         cartQuantity: -1
       })
-    },
-    clearCart({ commit }) {
-      commit('clearCart');
     }
   }
 }

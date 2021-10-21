@@ -18,7 +18,7 @@
               </div>
             </td>
             <td class="column-2">{{ item.productName }}</td>
-            <td class="column-3">${{ item.productPrice }}</td>
+            <td class="column-3">{{ item.productPrice }} 원</td>
             <td class="column-4 p-l-60">
               <div class="flex-w bo5 of-hidden w-size17">
                 <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2" @click="decrease(item)">
@@ -30,27 +30,32 @@
                 </button>
               </div>
             </td>
-            <td class="column-5">${{ item.cartQuantity * item.productPrice }}</td>
+            <td class="column-5">{{ item.cartQuantity * item.productPrice }}원</td>
           </tr>
         </template>
       </table>
     </div>
-      <P class="totalPrice float-right">Total Price: ${{totalCartPrice}}</P>
+      <P class="totalPrice float-right">Total Price: {{totalCartPrice}} 원</P>
+
+    <div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
+      <div class="flex-w flex-m w-full-sm">
+      </div>
+
+      <div class="size10 trans-0-4 m-t-10 m-b-10">
+        <!-- Button -->
+        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" @click="orderProduct">
+          상품 전체 주문 및 결제
+        </button>
+      </div>
+    </div>
   </div>
+
 </template>
 <script>
   import { mapState, mapGetters } from 'vuex';
 
   export default {
     props: ["baseURL"],
-    data(){
-      return{
-        productId: null,
-        productName: null,
-        productPrice: null,
-        cartQuantity: null,
-      }
-    },
 
     computed: {
       ...mapState('cart', {
@@ -71,9 +76,14 @@
       },
       decrease(item) {
         this.$store.dispatch('cart/decreaseQty', item);
+      },
+      orderProduct(){
+
+        this.$store.dispatch('order/orderProduct',this.cartItems);
+        this.$store.dispatch('order/setMyOrders');
+        this.$router.push('/myOrders');
       }
     },
-
     created(){
       this.$store.dispatch('cart/getMyCart')
     }

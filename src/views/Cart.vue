@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(https://picsum.photos/1920/239/?image=864);">
+    <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(https://picsum.photos/1920/239/?image=810);">
       <h2 class="l-text2 t-center">
         Cart
       </h2>
@@ -10,18 +10,6 @@
       <div class="container">
         <!-- Cart item -->
         <CartList />
-
-        <div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
-          <div class="flex-w flex-m w-full-sm">
-          </div>
-
-          <div class="size10 trans-0-4 m-t-10 m-b-10">
-            <!-- Button -->
-            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" @click="clearCart">
-              상품 전체 주문 및 결제
-            </button>
-          </div>
-        </div>
 
 
         <!-- Total -->
@@ -108,11 +96,6 @@
   import CartList from '@/components/carts/CartList.vue';
 
   export default {
-    methods: {
-      clearCart() {
-        this.$store.dispatch('cart/clearCart');
-      }
-    },
     components: {
       CartList
     }

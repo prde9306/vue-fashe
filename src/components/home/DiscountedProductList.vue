@@ -7,7 +7,6 @@
           List of products on discount
         </h3>
       </div>
-
       <!-- Slide2 -->
       <div class="wrap-slick2">
         <div class="slick2" ref="slick">
@@ -16,27 +15,26 @@
           </template>
         </div>
       </div>
-
     </div>
   </section>
 </template>
 <script>
   import { mapState } from 'vuex';
 
-  import Product from '@/components/Product.vue';
+  import Product from '@/components/shop/Product.vue';
 
   export default {
     props:["baseURL"],
     computed: {
       ...mapState('product', {
-        products: state => state.featuredProducts
+        products: state => state.discountedProducts
       })
     },
     methods: {
 
     },
     created() {
-      this.$store.dispatch('product/setFeaturedProducts').then(() => {
+      this.$store.dispatch('product/setDiscountedProducts').then(() => {
         $(this.$refs.slick).slick2();
       });
     },

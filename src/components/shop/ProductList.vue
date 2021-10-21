@@ -10,7 +10,7 @@
 <script>
   import { mapState } from 'vuex';
 
-  import Product from '@/components/Product.vue';
+  import Product from '@/components/shop/Product.vue';
 
   export default {
     computed: {

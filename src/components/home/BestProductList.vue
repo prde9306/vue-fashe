@@ -11,7 +11,7 @@
 
               <div class="block1-wrapbtn w-size2">
                 <!-- Button -->
-                <router-link to="/" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                <router-link to="/shop" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
                   {{ product.linkText }}
                 </router-link>
               </div>
@@ -27,7 +27,7 @@
 
               <div class="block1-wrapbtn w-size2">
                 <!-- Button -->
-                <router-link to="/" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                <router-link to="/shop" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
                   {{ product.linkText }}
                 </router-link>
               </div>
@@ -42,7 +42,7 @@
 
             <div class="block1-wrapbtn w-size2">
               <!-- Button -->
-              <router-link to="/" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+              <router-link to="/shop" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
                 {{ thirdColumn.linkText }}
               </router-link>
             </div>

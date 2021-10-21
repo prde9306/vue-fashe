@@ -1,22 +1,17 @@
 [
   {
-    "title": "메인 상품1",
-    "subtitle": "메인 상품1 설명",
-    "image": "https://picsum.photos/1920/570/?image=810"
+    "title": "",
+    "subtitle": "",
+    "image": "https://shoppingmall-bucket.s3.ap-northeast-2.amazonaws.com/static/ccc61f1c-276c-4de4-b2ee-b0d4326269cfSALE.jpeg"
   },
   {
-    "title": "메인 상품2",
-    "subtitle": "메인 상품2 설명",
-    "image": "https://picsum.photos/1920/570/?image=811"
+    "title": "Spring Boot Shopping Mall!!",
+    "subtitle": "",
+    "image": "https://shoppingmall-bucket.s3.ap-northeast-2.amazonaws.com/static/9eb44418-004a-4855-a68e-a66f58918bddONEWAY1.jpeg"
   },
   {
-    "title": "메인 상품3",
-    "subtitle": "메인 상품3 설명",
+    "title": "핸드폰",
+    "subtitle": "핸드폰 구입을 원하십니까?",
     "image": "https://picsum.photos/1920/570/?image=816"
-  },
-  {
-    "title": "메인 상품4",
-    "subtitle": "메인 상품4 설명",
-    "image": "https://picsum.photos/1920/570/?image=813"
   }
 ]

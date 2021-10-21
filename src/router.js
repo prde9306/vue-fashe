@@ -7,6 +7,9 @@ import Cart from "@/views/Cart";
 import SignIn from "@/views/SignIn";
 import SignUp from "@/views/SignUp";
 import Profile from "@/components/user/profile";
+import OrderList from "@/views/OrderList";
+import ProductDetails from "@/components/shop/ProductDetails";
+import OrderDetails from "@/components/order/OrderDetails"
 
 Vue.use(Router);
 
@@ -42,6 +45,22 @@ export const router= new Router({
       path: '/profile',
       name: 'profile',
       component: Profile
+    },
+    {
+      path: '/myOrders',
+      name: 'orderList',
+      component: OrderList
+    },
+    {
+      path: '/myOrders/:id',
+      name: 'orderDetails',
+      component: OrderDetails,
+      props: route => ({id: Number(route.params.id)})
+    },
+    {
+      path: '/productDetails',
+      name: 'productDetails',
+      component: ProductDetails
     },
     {
       path:'/*',

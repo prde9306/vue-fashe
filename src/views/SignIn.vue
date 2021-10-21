@@ -64,7 +64,10 @@
 </template>
 
 <script>
+
+
 export default {
+
   name: 'signIn',
   props: ["baseURL"],
 
@@ -93,14 +96,13 @@ export default {
       })
         .then(res => {
           localStorage.setItem('token', res.data.token);
-          this.$router.replace('/');
+          this.$store.dispatch('cart/getMyCart');
+          this.$router.push('/');
+
         })
          .catch(err => {
            alert(err.response.data.message);
             console.log(err);
-         })
-         .finally(() => {
-
          })
     }
   },

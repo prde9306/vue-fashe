@@ -1,8 +1,5 @@
 <template>
   <header class="header1">
-    <!--sementic-ui-->
-    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-     <!--sementic-ui-->
 
     <!-- Header desktop -->
     <div class="container-menu-header">
@@ -28,21 +25,41 @@
                     <img src="images/icons/springboot.png" alt="IMG-LOGO">
                 </a>
 
-                <!-- Menu -->
-                <div class="wrap_menu">
-                    <nav class="menu">
-                        <ul class="main_menu">
+              <!-- Menu -->
+              <div class="wrap_menu">
+                <nav class="menu">
+                  <ul class="main_menu">
 
-                            <router-link :to="{name: 'shop'}" tag="li" active-class="sale-noti" exact>
-                                <a>Shop</a>
-                            </router-link>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> All Categories </a>
+                      <ul class="dropdown-menu">
+                        <li v-for="upCategory in categories" v-if="upCategory.categoryLevel ===1">
+                          <a class="dropdown-item" href="#"> {{ upCategory.categoryName }} &raquo; </a>
+                          <ul class="submenu dropdown-menu">
+                            <li @click="selectSecondProduct(lowCategory.categoryName)" v-for="lowCategory in categories"
+                                v-if="lowCategory.categoryLevel ===2 &&lowCategory.upperCategoryCode===upCategory.categoryCode">
+                              <router-link :to ="{name:'shop'}" class="dropdown-item" >{{ lowCategory.categoryName }}</router-link>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
 
-                            <router-link :to="{name: 'cart'}" tag="li" active-class="sale-not" exact>
-                                <a>Cart</a>
-                            </router-link>
-                        </ul>
-                    </nav>
-                </div>
+                    <router-link :to="{name: 'shop'}" tag="li" active-class="sale-noti" exact>
+                      <a>Shopping List</a>
+                    </router-link>
+
+                    <router-link :to="{name: 'cart'}" tag="li" active-class="sale-noti" exact>
+                      <a>Cart</a>
+                    </router-link>
+
+                    <router-link :to="{name: 'orderList'}" tag="li" active-class="sale-noti" exact>
+                      <a>My Order List</a>
+                    </router-link>
+
+                  </ul>
+                </nav>
+              </div>
 
                 <!-- Header Icon -->
                 <ul class="header-icons">
@@ -76,9 +93,11 @@
                                         </div>
 
                                         <div class="header-cart-item-txt">
-                                            <router-link to="/" class="header-cart-item-name">
+                                          <button @click="sendProductId(product.productId)"class="header-cart-item-name">
+                                          <router-link :to="{name:'productDetails'}" >
                                                 {{ product.productName }}
                                             </router-link>
+                                          </button>
 
                                             <span class="header-cart-item-info">
                                               {{ product.cartQuantity }} x ${{ product.productPrice }}
@@ -212,22 +231,6 @@
 							Free shipping for standard order over $100
 						</span>
                     </li>
-
-<!--                    <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">-->
-<!--                        <div class="topbar-child2-mobile">-->
-<!--							<span class="topbar-email">-->
-<!--								fashe@example.com-->
-<!--							</span>-->
-
-<!--                            <div class="topbar-language rs1-select2">-->
-<!--                                <select class="selection-1" name="time">-->
-<!--                                    <option>USD</option>-->
-<!--                                    <option>EUR</option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-
                     <li class="item-topbar-mobile p-l-10">
                         <div class="topbar-social-mobile">
                             <a href="#" class="topbar-social-item fa fa-facebook"></a>
@@ -277,19 +280,19 @@
     </header>
 </template>
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-<script src="semantic/dist/semantic.min.js"></script>
-
 <script>
+    import EventBus from "@/EventBus";
+
     import { mapState, mapGetters } from 'vuex';
 
     export default {
       name : "Header",
       data(){
         return{
-          token: null
+          token: "",
+          product:{
+            productId: this.product.productId
+          }
         }
       },
       methods:{
@@ -300,23 +303,69 @@
         },
         delItem(product) {
           this.$store.dispatch('cart/delItem', product);
-          alert
-          this.$router.go(this.$router.currentRoute);
-
         },
-      },
-      mounted(){
-        this.token = localStorage.getItem('token');
+        sendProductId(value){
+          EventBus.$emit('sendId',value);
+        },
+        selectSecondProduct(secondCatCode){
+          EventBus.$emit('sendSecondCatCode', secondCatCode);
+          this.$store.dispatch('product/setSecondProduct', secondCatCode)
+        }
       },
         computed: {
             ...mapState('cart', {
                 cartItems: state => state.myCart
             }),
+            ...mapState('category',{
+               categories : state =>state.allCategories
+             }),
             ...mapGetters('cart', {
                 totalCartPrice: 'totalPrice',
                 totalCartQty: 'totalQty'
             })
-        }
+        },
+      created(){
+        this.token = localStorage.getItem('token');
+        this.$store.dispatch('category/setAllCategories');
+        //home에서 cart새로고침하지 않고 데이터가져오기
+        this.$store.dispatch('cart/getMyCart');
+      }
     }
 </script>
+
+<style type="text/css">
+
+/* ============ desktop view ============ */
+@media all and (min-width: 992px) {
+
+  .dropdown-menu li{
+    position: relative;
+  }
+  .dropdown-menu .submenu{
+    display: none;
+    position: absolute;
+    left:100%; top:-7px;
+  }
+  .dropdown-menu .submenu-left{
+    right:100%; left:auto;
+  }
+
+  .dropdown-menu > li:hover{ background-color: #f1f1f1 }
+  .dropdown-menu > li:hover > .submenu{
+    display: block;
+  }
+}
+/* ============ desktop view .end// ============ */
+
+/* ============ small devices ============ */
+@media (max-width: 991px) {
+
+  .dropdown-menu .dropdown-menu{
+    margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;
+  }
+
+}
+/* ============ small devices .end// ============ */
+
+</style>
 

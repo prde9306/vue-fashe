@@ -1,27 +1,27 @@
 [
   {
-    "image": "https://picsum.photos/720/932/?image=341",
-    "link": "",
+    "image": "https://shoppingmall-bucket.s3.ap-northeast-2.amazonaws.com/static/21e6eece-3da0-4cf1-8855-f127349b8578%E1%84%82%E1%85%A1%E1%86%B7%E1%84%8C%E1%85%A1%E1%84%8B%E1%85%A9%E1%86%BA.jpeg",
+    "link": "/",
     "linkText": "DRESSES"
   },
   {
-    "image": "https://picsum.photos/720/660/?image=271",
+    "image": "https://shoppingmall-bucket.s3.ap-northeast-2.amazonaws.com/static/5a1aa5b9-b009-4931-b32b-625dd00215cf%E1%84%82%E1%85%A9%E1%84%90%E1%85%B3%E1%84%87%E1%85%AE%E1%86%A8B.jpeg",
     "link": "",
-    "linkText": "SUNGLASSES"
+    "linkText": "Electronics"
   },
   {
-    "image": "https://picsum.photos/720/660/?image=695",
+    "image": "https://shoppingmall-bucket.s3.ap-northeast-2.amazonaws.com/static/62d6aded-923d-45ac-bc78-c2f55325029c%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%A1%E1%84%8C%E1%85%B5B.jpeg",
     "link": "",
-    "linkText": "WATCHES"
+    "linkText": "Cats & Dogs"
   },
   {
-    "image": "https://picsum.photos/720/932/?image=803",
+    "image": "https://shoppingmall-bucket.s3.ap-northeast-2.amazonaws.com/static/da673be9-6529-4cdc-a68a-99a96c081a87%E1%84%89%E1%85%B5%E1%86%AB%E1%84%87%E1%85%A1%E1%86%AF1.jpeg",
     "link": "",
     "linkText": "FOOTERWEAR"
   },
   {
-    "image": "https://picsum.photos/720/932/?image=966",
+    "image": "https://shoppingmall-bucket.s3.ap-northeast-2.amazonaws.com/static/68199a7d-65c8-43b1-9835-71cad1236f9a%E1%84%80%E1%85%B5%E1%86%B7%E1%84%89%E1%85%A5%E1%86%BC%E1%84%8C%E1%85%AE%E1%86%AB+%E1%84%8C%E1%85%B3%E1%86%BC%E1%84%86%E1%85%A7%E1%86%BC%E1%84%89%E1%85%A1%E1%84%8C%E1%85%B5%E1%86%AB.jpeg",
     "link": "",
-    "linkText": "BAGS"
+    "linkText": "MANS"
   }
 ]
